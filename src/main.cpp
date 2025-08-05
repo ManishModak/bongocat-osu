@@ -1,4 +1,8 @@
 #include "header.hpp"
+#include "../include/VoiceRecorder.h"
+#include <algorithm> 
+
+VoiceRecorder recorder;    
 
 #if !defined(__unix__) && !defined(__unix)
 #include <windows.h>
@@ -23,6 +27,40 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     // initialize input
     if (!input::init()) {
         return EXIT_FAILURE;
+    }
+
+    if (sf::SoundRecorder::isAvailable()) {
+        // Try to find and use headphone microphone
+        std::vector<std::string> devices = recorder.getAvailableDevices();
+        bool foundHeadphoneMic = false;
+        
+        // Look for common headphone microphone names
+        std::vector<std::string> headphoneKeywords = {
+            "headphone", "headset", "earphone", "wireless", "bluetooth",
+            "usb", "gaming", "headset mic", "headphone mic"
+        };
+        
+        for (const std::string& device : devices) {
+            std::string lowerDevice = device;
+            std::transform(lowerDevice.begin(), lowerDevice.end(), lowerDevice.begin(), ::tolower);
+            
+            for (const std::string& keyword : headphoneKeywords) {
+                if (lowerDevice.find(keyword) != std::string::npos) {
+                    if (recorder.setDevice(device)) {
+                        foundHeadphoneMic = true;
+                        break;
+                    }
+                }
+            }
+            if (foundHeadphoneMic) break;
+        }
+        
+        // If no headphone mic found, use default device
+        if (!foundHeadphoneMic && !devices.empty()) {
+            recorder.setDevice(devices[0]);
+        }
+        
+        recorder.start();
     }
 
     bool is_reload = false;

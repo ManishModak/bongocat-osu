@@ -1,3 +1,14 @@
+# Voice Enhanced Version - Additions
+
+This release includes new features and improvements on top of the original Bongo Cat for osu!:
+
+## 🎤 Voice Detection & Independent Mouth Movement
+- The cat's mouth opens when you speak, regardless of keyboard or mouse input.
+- Automatic detection and use of headphone microphones.
+- Smooth voice animation with noise reduction and signal amplification.
+
+## 📝 Original README
+
 # Description
 An osu! Bongo Cat overlay with smooth paw movement and simple skinning ability, written in C++. Originally created by [HamishDuncanson](https://github.com/HamishDuncanson).
 
@@ -56,5 +67,4 @@ make test
 
 Alternatively, you can copy the newly-compiled `bin/bongo.exe` or `bin/bongo` into the base directory and execute it.
 
-If you have troubles compiling, it can be due to version mismatch between your compiler and SFML. See [#43](https://github.com/kuroni/bongocat-osu/issues/43) for more information.
-
+If you have troubles compiling, it can be due to version mismatch between your compiler and SFML. See [#43](https://github.com/kuroni/bongocat-osu/issues/43) for more information. 

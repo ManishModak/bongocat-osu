@@ -1,4 +1,7 @@
 #include "header.hpp"
+#include "../include/VoiceRecorder.h"     
+
+extern VoiceRecorder recorder; 
 
 namespace osu {
 Json::Value left_key_value, right_key_value, smoke_key_value, wave_key_value;
@@ -7,7 +10,7 @@ int paw_r, paw_g, paw_b, paw_a;
 int paw_edge_r, paw_edge_g, paw_edge_b, paw_edge_a;
 double scale;
 bool is_mouse, is_left_handed, is_enable_toggle_smoke;
-sf::Sprite bg, up, left, right, device, smoke, wave;
+sf::Sprite bg, up, left, right, device, smoke, wave, mouthopen;
 
 int key_state = 0;
 
@@ -77,6 +80,7 @@ bool init() {
     left.setTexture(data::load_texture("img/osu/left.png"));
     right.setTexture(data::load_texture("img/osu/right.png"));
     wave.setTexture(data::load_texture("img/osu/wave.png"));
+    mouthopen.setTexture(data::load_texture("img/osu/mouthopen.png"));
     if (is_mouse) {
         bg.setTexture(data::load_texture("img/osu/mousebg.png"));
         device.setTexture(data::load_texture("img/osu/mouse.png"), true);
@@ -240,6 +244,9 @@ void draw() {
     circ2.setPosition(pss2[50] - width / 2, pss2[51] - width / 2);
     window.draw(circ2);
 
+    const float MOUTH_THRESHOLD = 0.01f; // Increased sensitivity - lowered from 0.05f to 0.01f
+    bool isSpeaking = recorder.getVolume() > MOUTH_THRESHOLD;
+
     // drawing keypresses
     bool left_key = false;
 
@@ -295,8 +302,15 @@ void draw() {
         wave_key_state = false;
     }
 
+    // Handle mouth movement independently of keyboard input
+    if (isSpeaking) {
+        // Always draw the open-mouth sprite when speaking, regardless of keyboard state
+        window.draw(mouthopen);
+    }
+
     if (!left_key_state && !right_key_state && !wave_key_state) {
         key_state = 0;
+        // Draw the default hand position when no keys are pressed
         window.draw(up);
     }
 
