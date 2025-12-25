@@ -1,8 +1,24 @@
-*.res
-*.exe
+# Build artifacts
 *.o
+*.res
+obj/
+obj-win/
+
+# Local config (users create their own)
 Makefile
-bongo
-bin/*
+
+# Build dependencies (download separately)
+build-deps/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Notes
 NOTE
-config.json

@@ -1,70 +1,181 @@
-# Voice Enhanced Version - Additions
+# Bongo Cat for osu! - Voice Enhanced Edition 🎤🐱
 
-This release includes new features and improvements on top of the original Bongo Cat for osu!:
+An osu! Bongo Cat overlay with **voice-activated mouth movement**, smooth paw animations, and simple skinning ability.
 
-## 🎤 Voice Detection & Independent Mouth Movement
-- The cat's mouth opens when you speak, regardless of keyboard or mouse input.
-- Automatic detection and use of headphone microphones.
-- Smooth voice animation with noise reduction and signal amplification.
+![Bongo Cat](img/osu/mousebg.png)
+
+## ✨ Features
+
+### 🎤 Voice Detection & Mouth Movement
+
+- The cat's mouth opens when you speak!
+- Automatic detection of headphone/headset microphones
+- Low-latency voice animation (no noticeable delay)
+- Works independently of keyboard/mouse input
+
+### 🎮 Gaming Streamer Ready
+
+- Tracks keyboard and mouse input
+- Customizable key bindings
+- Perfect for streaming overlays
+- Christmas theme included! 🎄
+
+---
+
+## 🚀 Quick Start (No Build Required!)
+
+### Windows
+
+1. Download `release/bongocat-osu-windows.zip`
+2. Extract the zip file
+3. Run `bongo.exe`
+4. Position the window on your stream overlay
+
+### Linux
+
+1. Download `release/bongocat-osu-linux.tar.gz`
+2. Extract: `tar -xzvf bongocat-osu-linux.tar.gz`
+3. Run: `./bin/bongo`
+4. Position the window on your stream overlay
+
+---
+
+## ⌨️ Controls
+
+| Key | Action |
+|-----|--------|
+| `Ctrl + R` | Reload config (while window is focused) |
+| `Ctrl + D` | Toggle debug panel |
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.json` to customize:
+
+### Mode
+
+```json
+"mode": 1
+```
+
+- `1` = osu! (keyboard + mouse) ✅ **Best for gaming**
+- `2` = Taiko
+- `3` = Catch
+- `4` = Mania
+- `5` = Custom
+
+### Key Bindings (for mode 1)
+
+```json
+"osu": {
+    "key1": [87, 65, 83, 68],           // WASD - left paw
+    "key2": [32, 16, 17, 69, 82],       // Space, Shift, Ctrl, E, R - right paw
+    "smoke": [89]                        // Y key - smoke effect
+}
+```
+
+### Common Key Codes
+
+| Key | Code | Key | Code |
+|-----|------|-----|------|
+| W | 87 | Space | 32 |
+| A | 65 | Shift | 16 |
+| S | 83 | Ctrl | 17 |
+| D | 68 | Alt | 18 |
+| E | 69 | Tab | 9 |
+| R | 82 | Esc | 27 |
+| Q | 81 | Enter | 13 |
+| F | 70 | 1-9 | 49-57 |
+
+### Christmas Theme 🎄
+
+To use the Christmas background, edit `config.json`:
+
+```json
+"mode": 5,
+"custom": {
+    "background": "img/osu/xmas.png",
+    ...
+}
+```
+
+---
+
+## 🔊 Voice Detection Tips
+
+- **Microphone**: Works best with headset/headphone mics
+- **Sensitivity**: Auto-calibrated, no setup needed
+- **Latency**: Optimized for minimal delay (~30ms)
+
+---
 
 ## 📝 Original README
 
-# Description
+### Description
+
 An osu! Bongo Cat overlay with smooth paw movement and simple skinning ability, written in C++. Originally created by [HamishDuncanson](https://github.com/HamishDuncanson).
 
 You can find how to configure the application in our [wiki](https://github.com/kuroni/bongocat-osu/wiki/Settings).
 
-Download the program [here](https://github.com/kuroni/bongocat-osu/releases).
-
 Hugs and kisses to [CSaratakij](https://github.com/CSaratakij) for creating the Linux port for this project!
-
-Any suggestion and/or collaboration, especially that relating to sprites, is welcomed! Thank you!
 
 [Original post](https://www.reddit.com/r/osugame/comments/9hrkte/i_know_bongo_cat_is_getting_old_but_heres_a_nicer/) by [Kuvster](https://github.com/Kuvster).
 
-## Further information
-In order to play with fullscreen on Windows 10, run both osu! and this application in Windows 7 compability mode.
+### Further Information
 
-Press Ctrl + R to reload configuration and images (will only reload configurations when the window is focused).
+- In order to play with fullscreen on Windows 10, run both osu! and this application in Windows 7 compatibility mode.
+- Press `Ctrl + R` to reload configuration and images (only works when window is focused).
 
-Supported operating system:
-* Windows
-* Linux (tested with Arch Linux with WINE Staging 5). Note: You **must** use WINE Staging, because for whatever reason on stable WINE bongocat-osu doesn't register keyboard input from other windows.
+### Supported Operating Systems
+
+- ✅ Windows (64-bit)
+- ✅ Linux (tested with Arch Linux with WINE Staging 5)
 
 _Notice_: If you're using WINE on Linux, make sure that osu! and this application run in the same `WINEPREFIX`.
 
-## For developers
-This project uses [SFML](https://www.sfml-dev.org/index.php) and [JsonCpp](https://github.com/open-source-parsers/jsoncpp). JsonCpp libraries are directly included in the source using the provided `amalgamation.py` from the developers.
+---
 
-### Libraries and dependency
+## 🛠️ Building from Source
 
-#### Windows and MinGW
-To build the source, download the SFML libraries [here](https://www.sfml-dev.org/index.php), copy `Makefile.windows` to `Makefile`, then replace *`<SFML-folder>`* in `Makefile` with the desired folder.
+### Linux
 
-#### Linux
-You need to have these dependencies installed. Check with your package manager for the exact name of these dependencies on your distro:
-- g++
-- libxdo
-- sdl2
-- sfml
-- x11
-- xrandr
+```bash
+# Install dependencies
+sudo apt install g++ libxdo-dev libsdl2-dev libsfml-dev libx11-dev libxrandr-dev
 
-Then, copy `Makefile.linux` to `Makefile`.
-
-### Building and testing
-To build, run this command from the base directory:
-
-```sh
+# Build
+cp Makefile.linux Makefile
 make
+
+# Run
+./bin/bongo
 ```
 
-To test the program, run this from the base directory:
+### Windows (Cross-compile from Linux)
 
-```sh
-make test
+```bash
+# Install MinGW
+sudo apt install mingw-w64
+
+# Download SFML for Windows
+mkdir build-deps && cd build-deps
+wget https://www.sfml-dev.org/files/SFML-2.6.1-windows-gcc-13.1.0-mingw-64-bit.zip
+unzip SFML-2.6.1-windows-gcc-13.1.0-mingw-64-bit.zip
+cd ..
+
+# Build
+make -f Makefile.cross-win
+
+# Output: bin/bongo.exe
 ```
 
-Alternatively, you can copy the newly-compiled `bin/bongo.exe` or `bin/bongo` into the base directory and execute it.
+---
 
-If you have troubles compiling, it can be due to version mismatch between your compiler and SFML. See [#43](https://github.com/kuroni/bongocat-osu/issues/43) for more information. 
+## 📜 License
+
+MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+Made with ❤️ for streamers and osu! players
