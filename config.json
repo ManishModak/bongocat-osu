@@ -1,5 +1,5 @@
 {
-    "mode": 1,
+    "mode": 5,
     "resolution": {
         "letterboxing": false,
         "width": 1920,
@@ -148,7 +148,21 @@
             0,
             0
         ],
-        "keyContainers": []
+        "keyContainers": [
+            {
+                "defaultImage": "img/osu/up.png",
+                "keys": [
+                    {
+                        "keyCodes": [87, 65, 83, 68],
+                        "image": "img/osu/left.png"
+                    },
+                    {
+                        "keyCodes": [37, 38, 39, 40],
+                        "image": "img/osu/right.png"
+                    }
+                ]
+            }
+        ]
     },
     "mousePaw": {
         "mousePawComment": "coordinates start in the top left of the window",
