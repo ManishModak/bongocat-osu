@@ -90,15 +90,44 @@ Edit `config.json` to customize:
 
 ### Christmas Theme 🎄
 
-To use the Christmas background, edit `config.json`:
+To use the Christmas background, open `config.json` in a text editor (Notepad) and make these changes:
+
+**Step 1:** Change mode from `1` to `5`:
 
 ```json
 "mode": 5,
+```
+
+**Step 2:** Make sure the custom section looks like this:
+
+```json
 "custom": {
     "background": "img/osu/xmas.png",
-    ...
+    "mouse": true,
+    "mouseImage": "img/osu/mouse.png",
+    "mouseOnTop": true,
+    "offsetX": 0,
+    "offsetY": 0,
+    "scalar": 1.0,
+    "paw": [255, 255, 255],
+    "pawEdge": [0, 0, 0],
+    "keyContainers": [
+        {
+            "defaultImage": "img/osu/up.png",
+            "keys": [
+                {
+                    "keyCodes": [87, 65, 83, 68, 32, 16, 17, 69, 82, 81, 70],
+                    "image": "img/osu/left.png"
+                }
+            ]
+        }
+    ]
 }
 ```
+
+**Step 3:** Save the file and restart `bongo.exe`
+
+> **Note:** In custom mode (mode 5), you need to configure `keyContainers` for the keyboard paw to work. The example above includes WASD, Space, Shift, Ctrl, E, R, Q, F keys.
 
 ---
 
