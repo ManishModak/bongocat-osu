@@ -1,4 +1,7 @@
 #include "header.hpp"
+#include "../include/VoiceRecorder.h"
+
+extern VoiceRecorder recorder;
 
 namespace custom {
 struct key {
@@ -121,7 +124,7 @@ struct key_container {
 };
 
 std::vector<key_container> key_containers;
-sf::Sprite bg, mouse;
+sf::Sprite bg, mouse, mouthopen;
 
 bool is_mouse, is_mouse_on_top;
 int offset_x, offset_y, scale;
@@ -141,6 +144,8 @@ bool init() {
             return false;
         }
         bg.setTexture(data::load_texture(custom["background"].asString()));
+
+        mouthopen.setTexture(data::load_texture("img/osu/mouthopen.png"));
 
         is_mouse = custom["mouse"].asBool();
         if (is_mouse) {
@@ -174,6 +179,13 @@ bool init() {
 
 void draw() {
     window.draw(bg);
+
+    const float MOUTH_THRESHOLD = 0.01f;
+    bool isSpeaking = recorder.getVolume() > MOUTH_THRESHOLD;
+
+    if (isSpeaking) {
+        window.draw(mouthopen);
+    }
 
     if (is_mouse) {
         // initializing pss and pss2 (kuvster's magic)
