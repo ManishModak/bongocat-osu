@@ -60,7 +60,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
             recorder.setDevice(devices[0]);
         }
         
-        recorder.start();
+        recorder.start(48000);  // 48kHz for lower latency
     }
 
     bool is_reload = false;
