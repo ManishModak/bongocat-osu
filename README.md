@@ -174,7 +174,6 @@ _Notice_: If you're using WINE on Linux, make sure that osu! and this applicatio
 sudo apt install g++ libxdo-dev libsdl2-dev libsfml-dev libx11-dev libxrandr-dev
 
 # Build
-cp Makefile.linux Makefile
 make
 
 # Run

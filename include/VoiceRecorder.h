@@ -10,6 +10,7 @@
 class VoiceRecorder : public sf::SoundRecorder {
 public:
     VoiceRecorder();
+    ~VoiceRecorder();  // Must call stop() before destruction
     float getVolume() const;
     bool setDevice(const std::string& deviceName);
     std::vector<std::string> getAvailableDevices() const;

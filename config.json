@@ -28,6 +28,7 @@
         ]
     },
     "osu": {
+        "background": "img/osu/mousebg.png",
         "mouse": true,
         "toggleSmoke": false,
         "paw": [

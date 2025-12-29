@@ -81,11 +81,19 @@ bool init() {
     right.setTexture(data::load_texture("img/osu/right.png"));
     wave.setTexture(data::load_texture("img/osu/wave.png"));
     mouthopen.setTexture(data::load_texture("img/osu/mouthopen.png"));
-    if (is_mouse) {
+    
+    // Check for custom background, otherwise use default
+    if (osu.isMember("background") && !osu["background"].asString().empty()) {
+        bg.setTexture(data::load_texture(osu["background"].asString()));
+    } else if (is_mouse) {
         bg.setTexture(data::load_texture("img/osu/mousebg.png"));
-        device.setTexture(data::load_texture("img/osu/mouse.png"), true);
     } else {
         bg.setTexture(data::load_texture("img/osu/tabletbg.png"));
+    }
+    
+    if (is_mouse) {
+        device.setTexture(data::load_texture("img/osu/mouse.png"), true);
+    } else {
         device.setTexture(data::load_texture("img/osu/tablet.png"), true);
     }
     smoke.setTexture(data::load_texture("img/osu/smoke.png"));

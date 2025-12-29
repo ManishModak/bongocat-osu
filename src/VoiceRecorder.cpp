@@ -7,6 +7,11 @@ VoiceRecorder::VoiceRecorder() : currentVolume(0.0f) {
     // You can also add setDevice("your-mic-name") if you want to specify a mic
 }
 
+VoiceRecorder::~VoiceRecorder() {
+    // SFML requires stop() to be called before the recorder is destroyed
+    stop();
+}
+
 // This function is called by SFML whenever it has a new chunk of audio data
 bool VoiceRecorder::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount) {
     long long sumOfAmplitudes = 0;
@@ -22,9 +27,9 @@ bool VoiceRecorder::onProcessSamples(const sf::Int16* samples, std::size_t sampl
     // Apply amplification for better sensitivity (3x boost)
     float amplifiedVolume = rawVolume * 3.0f;
     
-    // REDUCED smoothing for faster response (was 0.7, now 0.3)
-    // Lower value = faster response, less smoothing
-    const float smoothingFactor = 0.3f;
+    // MINIMAL smoothing for rapid response to mimic natural speaking
+    // Lower value = faster response, mouth closes quickly between syllables
+    const float smoothingFactor = 0.1f;
     currentVolume = (smoothingFactor * currentVolume) + ((1.0f - smoothingFactor) * amplifiedVolume);
     
     // Clamp the volume to prevent it from going above 1.0

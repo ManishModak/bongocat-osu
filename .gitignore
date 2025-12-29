@@ -5,7 +5,7 @@ obj/
 obj-win/
 
 # Local config (users create their own)
-Makefile
+
 
 # Build dependencies (download separately)
 build-deps/
