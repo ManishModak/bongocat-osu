@@ -177,7 +177,7 @@ sudo apt install g++ libxdo-dev libsdl2-dev libsfml-dev libx11-dev libxrandr-dev
 make
 
 # Run
-./bin/bongo
+./bongo
 ```
 
 ### Windows (Cross-compile from Linux)

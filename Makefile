@@ -10,9 +10,9 @@ INCFLAGS := -Iinclude
 
 .PHONY: test create clean
 
-all: create bin/bongo
+all: create bongo
 
-bin/bongo: $(OBJ)
+bongo: $(OBJ)
 	$(CXX) -o $@ $^ $(INCFLAGS) $(CXXFLAGS) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
@@ -23,7 +23,7 @@ create:
 	mkdir -p bin
 
 test:
-	bin/bongo
+	./bongo
 
 clean:
 	rm $(OBJ) || true

@@ -29,7 +29,7 @@ bool VoiceRecorder::onProcessSamples(const sf::Int16* samples, std::size_t sampl
     
     // MINIMAL smoothing for rapid response to mimic natural speaking
     // Lower value = faster response, mouth closes quickly between syllables
-    const float smoothingFactor = 0.1f;
+    const float smoothingFactor = 0.5f;
     currentVolume = (smoothingFactor * currentVolume) + ((1.0f - smoothingFactor) * amplifiedVolume);
     
     // Clamp the volume to prevent it from going above 1.0

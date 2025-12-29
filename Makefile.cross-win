@@ -15,9 +15,9 @@ DEFINES := -DSFML_STATIC
 
 .PHONY: test create clean
 
-all: create bin/bongo.exe
+all: create bongo.exe
 
-bin/bongo.exe: $(OBJ) $(ICO)
+bongo.exe: $(OBJ) $(ICO)
 	$(CXX) -o $@ $^ $(DEFINES) $(INCFLAGS) $(LIBFLAGS) $(CXXFLAGS) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
@@ -31,7 +31,7 @@ create:
 	mkdir -p bin
 
 test:
-	wine bin/bongo.exe
+	wine ./bongo.exe
 
 clean:
 	rm -f $(OBJ) $(ICO)
