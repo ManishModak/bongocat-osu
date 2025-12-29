@@ -506,7 +506,16 @@ std::pair<double, double> get_xy() {
     }
 #endif
 
-    return std::make_pair(x, y);
+    // Apply position smoothing (lerp) for smoother arm movement
+    // Lower factor = smoother but more laggy, higher = more responsive but jittery
+    static double smooth_x = x;
+    static double smooth_y = y;
+    const double smoothFactor = 0.3;  // Keep 30% of previous position
+    
+    smooth_x = smooth_x * smoothFactor + x * (1.0 - smoothFactor);
+    smooth_y = smooth_y * smoothFactor + y * (1.0 - smoothFactor);
+
+    return std::make_pair(smooth_x, smooth_y);
 }
 
 void drawDebugPanel() {
